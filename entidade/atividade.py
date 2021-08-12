@@ -1,7 +1,3 @@
 
 
-class Atividade():
-    pass
-        
-
 

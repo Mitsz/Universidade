@@ -22,20 +22,20 @@ class TelaAluno():
         print('Preencha os campos a seguir')
         nome = input('Nome: ')
         idade = input('Idade: ')
-        matricula = input('Matrícula: ')
+        codigo = input('Matrícula: ')
 
         return {
             'nome': nome,
             'idade': idade,
-            'matricula': matricula
+            'matricula': codigo
         }
 
     def excluir_aluno(self):
         print('Você escolheu excluir aluno')
         print('Preencha a matrícula do aluno que deseja excluir do sistema')
-        matricula = input('Matrícula: ')
+        codigo = input('Matrícula: ')
 
-        return matricula
+        return codigo
 
     def lista_alunos(self):
         print('Você escolheu listar os alunos cadastrados')

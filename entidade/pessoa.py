@@ -3,10 +3,14 @@ from abc import ABC, abstractmethod
 class Pessoa(ABC):
 
     @abstractmethod
-    def __init__(self, nome: str, codigo: int):
-        if isinstance(nome, str) and isinstance(codigo, int):
+    def __init__(self, nome: str, codigo: int, idade:int):
+        if(isinstance(nome, str) and
+         isinstance(codigo, int) and
+         isinstance(idade, int) and 0<idade<=150
+        ):
             self.__nome = nome
             self.__codigo = codigo
+            self.__idade = idade
         else:
             raise Exception
         
@@ -24,3 +28,15 @@ class Pessoa(ABC):
     @property
     def codigo(self):
         return self.__codigo
+
+    @property
+    def idade(self):
+        return self.__idade
+
+    @idade.setter
+    def idade(self, idade: int):
+        if isinstance(idade, int):
+            self.__idade = idade
+        else:
+            raise Exception
+            
