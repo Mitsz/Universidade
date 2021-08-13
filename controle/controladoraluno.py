@@ -1,26 +1,41 @@
 from entidade.aluno import Aluno
 from tela.telaaluno import TelaAluno
+from controle.excecoes import ListaVaziaException
+from controle.excecoes import NenhumSelecionadoException
+from controle.excecoes import CampoEmBrancoException
 
 class ControladorAluno():
 
     def __init__(self, tela_aluno: TelaAluno):
         self.__tela_aluno = tela_aluno
+        self.__lista_aluno = []
 
     def adiciona_aluno(self):
         while True:
             try:
-                nome = self.__tela_aluno.le_nome() 
-                if nome == '':
-                    raise CampoEmBrancoException 
-                else:
+                dados = self.__tela_aluno.le_dados()
+                if dados == None:
                     break
+                if dados['nome'] == '' or dados['idade'] == '':
+                    raise CampoEmBrancoException
+                else:
+                    try:
+                        if int(dados['idade']) < 18 or int(dados['idade']) > 150:
+                            raise ValueError
+                        break
+                    except ValueError:
+                        self.__tela_aluno.mensagem('A idade deve ser um numero inteiro entre 18 e 150!') 
             except CampoEmBrancoException as mensagem:
-                self.__tela_aluno.mensagem(mensagem) 
+                self.__tela_aluno.mensagem(mensagem)
+        if dados is not None: 
+            self.__lista_aluno.append(Aluno(dados['nome'], self.__gera_codigo, int(dados['idade'])))
+            self.__gera_codigo += 1
 
               
     def remove_aluno(self):
-        aluno_selecionado = self.seleciona_aluno()
+        aluno_selecionado = self.encontra_aluno_por_codigo()
         if aluno_selecionado is not None:
+            self.__lista_aluno.remove(aluno_selecionado)
             self.__tela_aluno.mensagem('Excluido!')
 
     def edita_aluno(self, aluno):
@@ -38,13 +53,13 @@ class ControladorAluno():
             aluno.nome = novo_nome
 
     def lista_alunos(self): 
-        return self.__lista_alunos
+        return self.__lista_aluno
 
     def encontra_aluno_por_codigo(self, codigo):
         pass
   
     def mostra_aluno(self):
-        self.__tela_aluno.mostra_aluno(self.lista_alunos())
+        self.__tela_aluno.mostra_aluno(self.__lista_aluno())
 
     def seleciona_aluno(self):
         pass
@@ -59,5 +74,3 @@ class ControladorAluno():
             else:
                 lista_opcoes[valor_lido]()
 
-
-#exceptions incluídas apenas com objetivo de organização de ideias, ainda nao implantadas.
