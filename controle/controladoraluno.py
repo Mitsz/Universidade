@@ -6,9 +6,24 @@ from controle.excecoes import CampoEmBrancoException
 
 class ControladorAluno():
 
-    def __init__(self, tela_aluno: TelaAluno):
-        self.__tela_aluno = tela_aluno
+    def __init__(self, ControladorSistema):
+        self.__controladosistema = ControladorSistema
+        self.__tela_aluno = TelaAluno()
         self.__lista_aluno = []
+
+    def abre_tela_aluno(self, TelaAluno):
+        lista_opcoes = {
+            1: self.adiciona_aluno, 
+            2: self.remove_aluno, 
+            3: self.edita_aluno, 
+            4: self.mostra_aluno
+            }
+        while True:
+            valor_lido = self.__tela_aluno.tela_aluno()
+            if valor_lido == 0 or valor_lido == None:
+                break
+            else:
+                lista_opcoes[valor_lido]()
 
 
     def adiciona_aluno(self):
@@ -17,7 +32,7 @@ class ControladorAluno():
             try:
                 if dados == None:
                     break
-                if dados['nome'] == '' or dados['idade'] == '' or dados['matricula'] == '':
+                if nome_curso['nome'] == '' or dados['idade'] == '' or dados['matricula'] == '':
                     raise CampoEmBrancoException
                 else:
                     try:
@@ -66,24 +81,9 @@ class ControladorAluno():
   
 
     def mostra_aluno(self):
-        self.__tela_aluno.mostra_aluno(self.__lista_aluno())
+        self.__tela_aluno.lista_aluno(self.__lista_aluno())
 
 
     def seleciona_aluno(self):
         pass
     #ainda em processo de criação
-
-
-    def abre_tela_aluno(self):
-        lista_opcoes = {
-            1: self.adiciona_aluno(), 
-            2: self.remove_aluno(), 
-            3: self.edita_aluno(), 
-            4: self.mostra_aluno()
-            }
-        while True:
-            valor_lido = self.__tela_aluno.opces_aluno()
-            if valor_lido == 0 or valor_lido == None:
-                break
-            else:
-                lista_opcoes[valor_lido]()

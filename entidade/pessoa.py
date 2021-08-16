@@ -33,4 +33,3 @@ class Pessoa(ABC):
             self.__data_nasc = data_nasc
         else:
             raise Exception
-            

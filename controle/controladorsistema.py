@@ -9,32 +9,17 @@ class ControladorSistema():
     
     def __init__(self):
         self.__tela_sistema = TelaSistema()
-        self.__controlador_curso = ControladorCurso
-        self.__controlador_disciplina = ControladorDisciplina
-        self.__controlador_atividade = ControladorAtividade
-        self.__controlador_professor = ControladorProfessor
-        self.__controlador_aluno = ControladorAluno
+        self.__controlador_curso = ControladorCurso(ControladorSistema)
+        self.__controlador_disciplina = ControladorDisciplina(ControladorSistema)
+        self.__controlador_atividade = ControladorAtividade(ControladorSistema)
+        self.__controlador_professor = ControladorProfessor(ControladorSistema)
+        self.__controlador_aluno = ControladorAluno(ControladorSistema)
 
     def iniciar_sistema(self):
         self.abre_tela()
 
-    def encerrar_sistema(self):
+    def encerrar_sistema(self, ControladorSistema):
         exit(0)
-
-    def gerencia_curso(self):
-        self.__controlador_curso.abre_tela_curso(self)
-
-    def gerencia_disciplina(self):
-        self.__controlador_disciplina.abre_tela_disc(self)
-
-    def gerencia_atividade(self):
-        self.__controlador_atividade.abre_tela_atv(self)
-    
-    def gerencia_professor(self):
-        self.__controlador_professor.abre_tela_prof(self)
-
-    def gerencia_aluno(self):
-        self.__controlador_aluno.abre_tela_aluno(self)
 
     def abre_tela(self):
         
@@ -53,3 +38,18 @@ class ControladorSistema():
             funcao_escolhida = lista_opcoes[opcao]
 
             funcao_escolhida(self)
+
+    def gerencia_curso(self, ControladorSistema):
+        self.__controlador_curso.abre_tela_curso(self)
+
+    def gerencia_disciplina(self, ControladorSistema):
+        self.__controlador_disciplina.abre_tela_disciplina(self)
+
+    def gerencia_atividade(self, ControladorSistema):
+        self.__controlador_atividade.abre_tela_atividade(self)
+
+    def gerencia_professor(self, ControladorSistema):
+        self.__controlador_professor.abre_tela_professor(self)
+
+    def gerencia_aluno(self, ControladorSistema):
+        self.__controlador_aluno.abre_tela_aluno(self)

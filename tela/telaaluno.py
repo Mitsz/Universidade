@@ -14,23 +14,19 @@ class TelaAluno():
         print('4 - Lista de alunos')
         print('0 - Retornar')
 
-        opcao = (input('Escolha a opção: '))
-        while True:
-            if opcao is not int:
-                raise ValueError
-            else:
-                return opcao
+        opcao = int(input('Escolha a opção: '))
+        return opcao
 
     def cadastra_aluno(self):
         print('Você escolheu cadastrar aluno')
         print('Preencha os campos a seguir')
         nome = input('Nome: ')
-        data_nasc = input('Data de Nascimento: ')
+        idade = input('Idade: ')
         matricula = input('Matrícula: ')
 
         return {
             'nome': nome,
-            'idade': data_nasc,
+            'idade': idade,
             'matricula': matricula
         }
 
@@ -41,5 +37,5 @@ class TelaAluno():
 
         return codigo
 
-    def lista_alunos(self):
+    def lista_aluno(self):
         print('Você escolheu listar os alunos cadastrados')
