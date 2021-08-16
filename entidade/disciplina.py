@@ -23,4 +23,5 @@ class Disciplina():
             self.__professor_responsavel = professor_responsavel
         if isinstance(max_alunos, int):
             self.__max_alunos = max_alunos
-        self.__lista_disciplinas = []
+        #self.__lista_disciplinas = []
+        #lista alunos

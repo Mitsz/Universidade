@@ -1,0 +1,2 @@
+class ControladorProfessor():
+    pass
